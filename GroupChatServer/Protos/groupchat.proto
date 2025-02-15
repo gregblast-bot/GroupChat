@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+ 
+option csharp_namespace = "Grpc.GroupChatServer";
+ 
+package groupchat;
+ 
+service GroupChat {
+  rpc EnterChat (Client) returns (stream GroupChatMessage);
+  rpc SendMessage (GroupChatMessage) returns (MessageResponse);
+}
+ 
+message Client {
+  string name = 1;
+  string group = 2;
+}
+ 
+message GroupChatMessage {
+  string message = 1;
+  string group = 2;
+}
+
+message MessageResponse {
+  bool ok = 1;
+}
