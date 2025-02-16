@@ -1,4 +1,4 @@
-﻿using Grpc.Core;
+using Grpc.Core;
 using System.Collections.Concurrent;
 
 namespace Grpc.GroupChatServer.Services;
