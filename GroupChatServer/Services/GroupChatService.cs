@@ -38,6 +38,7 @@ public class GroupChatService : GroupChat.GroupChatBase
         var unreadMessages = _streamingService.GetUnreadMessages(group);
         foreach (var message in unreadMessages)
         {
+            _logger.LogInformation($"{name} received unread message... {message}.");
             await responseStream.WriteAsync(message);
         }
 
@@ -54,7 +55,7 @@ public class GroupChatService : GroupChat.GroupChatBase
     /// <returns>A Task of MessageResponse.</returns>
     public override async Task<MessageResponse> SendMessage(GroupChatMessage request, ServerCallContext context)
     {
-        _logger.LogInformation($"{request.Message} is received.");
+        _logger.LogInformation($"{request.Message} is received by {request.Group}.");
 
         await _streamingService.SendMessage(request);
         return new MessageResponse() { Ok = true };

@@ -1,7 +1,9 @@
 using Grpc.GroupChatServer.Services;
 
+namespace Grpc.GroupChatServer.Main;
+
 /// <summary>
-/// This program processes inputs from the client and sends relays those messages to other clients in the group chat.
+/// This program processes inputs from the client and then relays those messages to other clients in the group chat.
 /// </summary>
 public class Program
 {

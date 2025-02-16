@@ -29,15 +29,15 @@ public class Program
         // Enter the chat room.
         var reply = client.EnterChat(new Client { Name = userName, Group = chatroomName });
 
-        startWriteThread(reply);
+        StartWriteThread(reply);
 
-        processInput(client, userName, chatroomName);
+        ProcessInput(client, userName, chatroomName);
     }
 
     /// <summary>
     /// Create a thread to read messages from the server.
     /// </summary>
-    static void startWriteThread(AsyncServerStreamingCall<GroupChatMessage> reply)
+    public static void StartWriteThread(AsyncServerStreamingCall<GroupChatMessage> reply)
     {
         var writeThread = new Thread(async () =>
         {
@@ -56,14 +56,14 @@ public class Program
     /// <summary>
     /// Continue processing inputs from the client while the client is active.
     /// </summary>
-    static void processInput(GroupChat.GroupChatClient client, string userName, string chatroomName)
+    public static void ProcessInput(GroupChat.GroupChatClient client, string userName, string chatroomName)
     {
         while (true)
         {
             var message = Console.ReadLine();
 
             Console.SetCursorPosition(0, Console.CursorTop - 1);
-            ClearLine();
+            clearLine();
 
             client.SendMessage(new GroupChatMessage { Message = $"{DateTime.Now}, {chatroomName}, {userName}: {message}", Group = chatroomName });
         }
@@ -72,7 +72,7 @@ public class Program
     /// <summary>
     /// Clears the current line in the console and resets the cursor position.
     /// </summary>
-    static void ClearLine()
+    static void clearLine()
     {
         int currentLineCursor = Console.CursorTop;
         Console.SetCursorPosition(0, Console.CursorTop);
